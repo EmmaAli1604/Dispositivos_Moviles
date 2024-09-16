@@ -15,7 +15,7 @@
     <string name="actuallyread">Lectura del día</string>
     <string name="favoritos">Favoritos</string>
     <string name="maintitle">Usuario</string>
-    <string name="search">Search</string>
+    <string name="search">Buscar</string>
     <string name="back">Regresar</string>
     <string name="edit">Editar</string>
     <string name="delete">Borrar</string>
@@ -40,5 +40,6 @@
     <string name="coments">Comentarios</string>
     <string name="img_book">Imagen del Libro</string>
     <string name="nothing">"  "</string>
+    <string name="user">Usuario</string>
 
 </resources>
