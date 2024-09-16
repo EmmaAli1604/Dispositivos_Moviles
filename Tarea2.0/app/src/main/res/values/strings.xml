@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Tarea2.0</string>
+    <string name="login">Log in</string>
+    <string name="signup">Sign up</string>
+    <string name="welcome">Bienvenido a su biblioteca</string>
+    <string name="title">Título</string>
+    <string name="description">Descripción</string>
+    <string name="opinion">Opinion</string>
+    <string name="Agregar">Agregar</string>
+    <string name="Modificar">Modificar</string>
+    <string name="addbook">Agregar Libro</string>
+    <string name="settings">Configuración</string>
+    <string name="mylibrary">Mi biblioteca</string>
+    <string name="wannaread">Libros pendientes</string>
+    <string name="actuallyread">Lectura del día</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="maintitle">Usuario</string>
+    <string name="search">Search</string>
+    <string name="back">Regresar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Borrar</string>
+    <string name="share">Compartir</string>
+    <string name="menuESD">Menu</string>
+    <string name="author">Autor</string>
+    <string name="editorial">Editorial</string>
+    <string name="datestart">Fecha de Inicio</string>
+    <string name="datefinal">Fecha Final</string>
+    <string name="opinionadd">Opininon</string>
+    <string name="romance">Romance</string>
+    <string name="thriller">Thriller</string>
+    <string name="aventura">Aventura</string>
+    <string name="politica">Poítica</string>
+    <string name="terror">Terror</string>
+    <string name="misterio">Misterio</string>
+    <string name="novela">Novela</string>
+    <string name="poesia">Poesia</string>
+    <string name="fantasia">Fantasia</string>
+    <string name="cienciaficcion">Ciencia Ficcion</string>
+    <string name="autobio">Autobiografia</string>
+    <string name="coments">Comentarios</string>
+    <string name="img_book">Imagen del Libro</string>
+    <string name="nothing">"  "</string>
+
+</resources>

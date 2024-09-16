@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Add an ImageButton with a back icon -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Back arrow button -->
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="47dp"
+                    android:layout_height="45dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:tint="@android:color/black" />
+
+                <!-- SearchBar -->
+                <com.google.android.material.search.SearchBar
+                    android:id="@+id/search_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/search" />
+
+                <ImageButton
+                    android:id="@+id/heart_button"
+                    android:layout_width="47dp"
+                    android:layout_height="45dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/favoritos"
+                    android:src="@drawable/baseline_favorite_24"
+                    app:tint="@color/md_theme_tertiaryFixed_highContrast" />
+
+                <ImageButton
+                    android:id="@+id/settings_button"
+                    android:layout_width="47dp"
+                    android:layout_height="45dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/settings"
+                    android:src="@drawable/baseline_settings_24"
+                    app:tint="@color/md_theme_tertiaryFixed_highContrast" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- NestedScrollView is placed below the AppBarLayout -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <!-- Add CardView inside NestedScrollView -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fav_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_margin="16dp"
+                    android:contentDescription="favourite"
+                    android:src="@drawable/baseline_favorite_border_24"
+                    app:backgroundTint="@color/md_theme_inversePrimary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Media -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="194dp"
+                        app:srcCompat="@drawable/imagen_libro1_background"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/imag_book"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <!-- Title, secondary and supporting text -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title"
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chipGroup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipromnace"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/romance"/>
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipthriller"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/thriller"/>
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chipterror"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/terror"/>
+
+                            </com.google.android.material.chip.ChipGroup>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/description"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?android:attr/textColorSecondary"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/opinion"
+                            android:textAppearance="?attr/textAppearanceBodyMedium"
+                            android:textColor="?android:attr/textColorSecondary"
+                            />
+
+                        <RatingBar
+                            android:id="@+id/ratingBaradd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                             />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</ScrollView>
