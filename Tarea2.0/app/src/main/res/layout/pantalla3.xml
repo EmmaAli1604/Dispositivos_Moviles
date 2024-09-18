@@ -9,58 +9,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Add an ImageButton with a back icon -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <!-- Back arrow button -->
-                <ImageButton
-                    android:id="@+id/back_button"
-                    android:layout_width="47dp"
-                    android:layout_height="45dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/back"
-                    android:src="@drawable/baseline_arrow_back_24"
-                    app:tint="@android:color/black" />
-
-                <!-- SearchBar -->
-                <com.google.android.material.search.SearchBar
-                    android:id="@+id/search_bar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/search" />
-
-                <ImageButton
-                    android:id="@+id/heart_button"
-                    android:layout_width="47dp"
-                    android:layout_height="45dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/favoritos"
-                    android:src="@drawable/baseline_favorite_24"
-                    app:tint="@color/md_theme_tertiaryFixed_highContrast" />
-
-                <ImageButton
-                    android:id="@+id/settings_button"
-                    android:layout_width="47dp"
-                    android:layout_height="45dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/settings"
-                    android:src="@drawable/baseline_settings_24"
-                    app:tint="@color/md_theme_tertiaryFixed_highContrast" />
-
-            </LinearLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
@@ -69,7 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:logo="@drawable/user_account"
+            app:logo="@drawable/baseline_arrow_back_24"
             app:menu="@menu/toolbar_menu"
             app:title="" />
 
