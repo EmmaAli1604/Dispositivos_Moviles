@@ -1,7 +1,11 @@
 package com.example.tarea20
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.tarea20.databinding.ActivityMainBinding
 
@@ -33,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(FormsFragment())
         }
 
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -40,6 +47,30 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbarfavorites -> {
+                replaceFragment(FavouritesFragment())
+                true
+            }
+            R.id.toolbarsettings-> {
+                replaceFragment(SettingsFragment())
+                true
+            }
+            R.id.toolbarsearch -> {
+                Toast.makeText(this, "Presionaste para buscar", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
 
 }
