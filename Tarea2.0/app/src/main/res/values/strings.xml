@@ -29,7 +29,7 @@
     <string name="romance">Romance</string>
     <string name="thriller">Thriller</string>
     <string name="aventura">Aventura</string>
-    <string name="politica">Poítica</string>
+    <string name="politica">Política</string>
     <string name="terror">Terror</string>
     <string name="misterio">Misterio</string>
     <string name="novela">Novela</string>
@@ -42,7 +42,8 @@
     <string name="nothing">"  "</string>
     <string name="user">Usuario</string>
     <string name="password">"Contraseña</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favoritesbooks">Tus Favoritos</string>
+    <string name="pendingbooks">Libros Pendientes</string>
+
 
 </resources>

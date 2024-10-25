@@ -57,7 +57,7 @@
                         android:layout_height="194dp"
                         app:srcCompat="@drawable/imagen_libro1_background"
                         android:scaleType="centerCrop"
-                        android:contentDescription="@string/imag_book"
+                        android:contentDescription="@string/img_book"
                         />
 
                     <LinearLayout

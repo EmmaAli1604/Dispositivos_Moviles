@@ -21,7 +21,7 @@
         <item name="cornerSize">4dp</item>
     </style>
 
-    <style name="Theme.App" parent="Theme.Material3.*">
+    <style name="Theme.App" parent="Theme.Material3.DayNight">
         ...
         <item name="borderlessButtonStyle">@style/Widget.App.Button.TextButton</item>
         <item name="materialButtonOutlinedStyle">@style/Widget.App.Button.OutlinedButton</item>
