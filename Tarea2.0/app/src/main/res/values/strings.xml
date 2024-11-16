@@ -44,6 +44,6 @@
     <string name="password">"Contraseña</string>
     <string name="favoritesbooks">Tus Favoritos</string>
     <string name="pendingbooks">Libros Pendientes</string>
-
+    <string name="cancel_book">Cancel</string>
 
 </resources>
