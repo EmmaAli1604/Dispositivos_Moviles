@@ -34,6 +34,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_item"
         android:layout_width="301dp"
         android:layout_height="378dp"
         app:layout_constraintEnd_toEndOf="parent"
