@@ -49,25 +49,6 @@
                         android:text="@string/title"
                         android:textAppearance="?attr/textAppearanceTitleLarge"/>
 
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/description"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="17sp"/>
-
-                    <TextView
-                        android:id="@+id/opinion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/opinion"
-                        android:textAppearance="?attr/textAppearanceBodyMedium"
-                        android:textColor="?android:attr/textColorSecondary"/>
-
                 </LinearLayout>
 
                 <LinearLayout

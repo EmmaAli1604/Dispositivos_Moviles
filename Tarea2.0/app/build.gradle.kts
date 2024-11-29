@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.tarea20"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.tarea20"
@@ -38,11 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
 
-    val fragment_version = "1.8.3"
+    val fragment_version = "1.8.5"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -51,7 +52,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
+    implementation ("com.google.android.material:material:1.9.0")
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
