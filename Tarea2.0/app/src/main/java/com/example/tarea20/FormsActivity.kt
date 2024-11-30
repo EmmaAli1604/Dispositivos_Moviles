@@ -3,10 +3,13 @@ package com.example.tarea20
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -18,6 +21,9 @@ import java.util.Calendar
 import java.util.Locale
 
 class FormsActivity : AppCompatActivity() {
+
+    lateinit var btnImage : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_forms) // Asocia el diseño con la actividad
@@ -85,22 +91,136 @@ class FormsActivity : AppCompatActivity() {
         chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
             for (checkedId in checkedIds) {
                 val selectedChip = findViewById<Chip>(checkedId)
-                Toast.makeText(this, "Seleccionaste: ${selectedChip?.text}", Toast.LENGTH_SHORT).show()
             }
         }
 
         // Agregar dinámicamente un chip
-        val newChip = Chip(this).apply {
-            text = "Opción 3"
+        val chipRomance = Chip(this).apply {
+            text = "Romance"
             isClickable = true
             isCheckable = true
         }
-        chipGroup.addView(newChip)
 
-        // Eliminar un chip dinámicamente
-        newChip.setOnClickListener {
-            chipGroup.removeView(newChip)
-            Toast.makeText(this, "Chip eliminado", Toast.LENGTH_SHORT).show()
+        val chipThriller = Chip(this).apply {
+            text = "Thriller"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipTerror = Chip(this).apply {
+            text = "Terror"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipFantasia = Chip(this).apply {
+            text = "Fantasía"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipNovela = Chip(this).apply {
+            text = "Novela"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipHistorico = Chip(this).apply {
+            text = "Historia"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipAventura = Chip(this).apply {
+            text = "Aventura"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipPolitica = Chip(this).apply {
+            text = "Política"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipPoesia = Chip(this).apply {
+            text = "Poesía"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipMisterio = Chip(this).apply {
+            text = "Misterio"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipCienciaFiccion = Chip(this).apply {
+            text = "Ciencia Ficción"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipAutoBio = Chip(this).apply {
+            text = "Autobiografía"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipBio = Chip(this).apply {
+            text = "Biografía"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipClasic = Chip(this).apply {
+            text = "Cláiscos"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipGotico = Chip(this).apply {
+            text = "Gótico"
+            isClickable = true
+            isCheckable = true
+        }
+
+        val chipCiencia = Chip(this).apply {
+            text = "Gótico"
+            isClickable = true
+            isCheckable = true
+        }
+
+
+        chipGroup.addView(chipGotico)
+        chipGroup.addView(chipClasic)
+        chipGroup.addView(chipRomance)
+        chipGroup.addView(chipCienciaFiccion)
+        chipGroup.addView(chipAventura)
+        chipGroup.addView(chipAutoBio)
+        chipGroup.addView(chipBio)
+        chipGroup.addView(chipMisterio)
+        chipGroup.addView(chipPoesia)
+        chipGroup.addView(chipPolitica)
+        chipGroup.addView(chipHistorico)
+        chipGroup.addView(chipTerror)
+        chipGroup.addView(chipThriller)
+        chipGroup.addView(chipFantasia)
+        chipGroup.addView(chipNovela)
+        chipGroup.addView(chipCiencia)
+
+        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){ uri ->
+            if(uri != null){
+                Log.i("aris","seleccionado")
+            }else{
+                Log.i("aris","no seleccionado")
+            }
+        }
+
+        btnImage = findViewById(R.id.addimage_button)
+
+        btnImage.setOnClickListener{
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         buttonSubmit.setOnClickListener{

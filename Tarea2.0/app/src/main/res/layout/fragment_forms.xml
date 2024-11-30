@@ -152,71 +152,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipromnace"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/romance"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipthriller"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/thriller"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipterror"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/terror"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipfantasia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fantasia"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipnovela"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/novela"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipaventura"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/aventura"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chippolitia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/politica"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chippoesia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/poesia"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipmisterio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/misterio"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipcienciafic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cienciaficcion"/>
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipautobio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/autobio"/>
 
                 </com.google.android.material.chip.ChipGroup>
             </LinearLayout>
@@ -230,6 +165,19 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/InputCategorias" />
+
+            <Button
+                android:id="@+id/addimage_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="90dp"
+                android:text="@string/agregar_imagen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBaradd">
+
+            </Button>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -268,6 +216,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
