@@ -1,12 +1,10 @@
 package com.example.tarea20
 
 data class ListItem(
-    val title: String,            // Para el título del libro
-    val author: String,           // Para el autor
-    val editorial: String,        // Para la editorial
-    val startDate: String,        // Para la fecha de inicio (Datestart)
-    val endDate: String,          // Para la fecha de fin (Datefinal)
-    val opinion: String,          // Para la opinión sobre el libro
-    val categories: List<String>, // Para las categorías seleccionadas
-    val rating: Float             // Para la calificación (ratingBaradd)
-)
+    //val image: Int,                //Para la imagen
+    val title: String? = null,            // Para el título del libro
+    val author: String? = null,           // Para el autor
+    val startDate: String? = null,        // Para la fecha de inicio (Datestart)
+    val endDate: String? = null,          // Para la fecha de fin (Datefinal)
+    val rating: Double? = null             // Para la calificación (ratingBaradd)
+): java.io.Serializable

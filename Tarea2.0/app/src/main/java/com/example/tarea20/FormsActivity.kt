@@ -4,12 +4,14 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -22,7 +24,16 @@ import java.util.Locale
 
 class FormsActivity : AppCompatActivity() {
 
+    //Boton de imagen
     lateinit var btnImage : Button
+    //Datos para mostrar en el recycleview
+    private lateinit var tituloTextView: TextView
+    private lateinit var autorTextView: TextView
+    private lateinit var startDateTextView: TextView
+    private lateinit var endDateTextView: TextView
+    private lateinit var ratingRatingBar: RatingBar
+    //ViewModel
+    private val viewModel: ViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -174,7 +185,7 @@ class FormsActivity : AppCompatActivity() {
         }
 
         val chipClasic = Chip(this).apply {
-            text = "Cláiscos"
+            text = "Clásicos"
             isClickable = true
             isCheckable = true
         }
@@ -224,7 +235,18 @@ class FormsActivity : AppCompatActivity() {
         }
 
         buttonSubmit.setOnClickListener{
-            
+            val titulo = tituloTextView.text.toString()
+            val autor = autorTextView.text.toString()
+            val startDate = startDateTextView.text.toString()
+            val endDate = endDateTextView.text.toString()
+            val rating = ratingRatingBar.rating.toDouble()
+
+            val elemento = ListItem(titulo,autor,startDate,endDate,rating)
+            viewModel.setData(elemento)
+
+            val intent = Intent(this, HomeFragment::class.java)
+            Toast.makeText(this, "Se cambio de pantalla",Toast.LENGTH_LONG).show()
+            startActivity(intent)
         }
 
         buttonCancel.setOnClickListener{

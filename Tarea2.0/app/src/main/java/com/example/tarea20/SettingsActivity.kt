@@ -11,9 +11,9 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_settings)
 
-        val button_back : Button = findViewById(R.id.back_Button)
+        val buttonback : Button = findViewById(R.id.back_Button)
 
-        button_back.setOnClickListener {
+        buttonback.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

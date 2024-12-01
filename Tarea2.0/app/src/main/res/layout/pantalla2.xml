@@ -29,6 +29,7 @@
                 <!-- Media -->
 
                 <ImageView
+                    android:id="@+id/image_view"
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
                     android:contentDescription="@string/imag"
@@ -43,11 +44,21 @@
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
-                        android:id="@+id/title"
+                        android:id="@+id/title_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/title"
                         android:textAppearance="?attr/textAppearanceTitleLarge"/>
+
+                    <TextView
+                        android:id="@+id/author_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/author"
+                        android:textAppearance="?attr/textAppearanceTitleMedium"
+                        >
+
+                    </TextView>
 
                 </LinearLayout>
 
@@ -58,19 +69,34 @@
                     android:layout_gravity="center"
                     >
 
-                    <Button
-                        android:id="@+id/startdate"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/startdate_view"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="@string/datestart" />
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:text="@string/datestart"
+                        android:background="@color/md_theme_primaryFixedDim"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="14sp" />
 
-                    <Button
-                        android:id="@+id/enddate"
-                        android:layout_width="140dp"
+                    <!-- Espaciador -->
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="0dp" />
+
+                    <!-- Fecha final -->
+                    <TextView
+                        android:id="@+id/enddate_view"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="@string/datefinal" />
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:text="@string/datefinal"
+                        android:background="@color/md_theme_primaryFixedDim"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -84,6 +110,7 @@
                     >
 
                     <RatingBar
+                        android:id="@+id/rating_bar_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:isIndicator="true"

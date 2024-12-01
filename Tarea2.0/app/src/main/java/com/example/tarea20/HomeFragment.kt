@@ -1,37 +1,65 @@
 package com.example.tarea20
 
-import android.app.LauncherActivity.ListItem
-import android.media.RouteListingPreference
+
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tarea20.databinding.ActivityMainBinding
-import com.google.android.material.appbar.MaterialToolbar
+
 
 class HomeFragment : Fragment() {
-    private lateinit var toolbar: MaterialToolbar
+
+    // Instancia del ViewModel
+    private val viewModel: ViewModel by viewModels()
+
+    // Instancia del adaptador
+    private lateinit var adapter: ListAdapater
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-
-        //val dataset = listOf(
-            //Item()
-        //)
-        //val customAdapter = ListItem(dataset)
-
-        //val recyclerView: RecyclerView = findViewById(R.id.list_item)
-        //recyclerView.layoutManager = LinearLayoutManager(this)
-        //recyclerView.adapter = customAdapter
-
-        return root
+    ): View {
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val library = ArrayList<ListItem>()
+        val recyclerView = view.findViewById<RecyclerView>(R.id.list_item)
+
+        // Recupera el objeto pasado como "elemento"
+        //viewModel.data.observe(viewLifecycleOwner)
+        //{ book ->
+        //     = book
+        //}
+
+        //book= ListItem("eres ","ramirs","07/07/2021","07/07/2024",4.5)
+
+        viewModel.data.observe(viewLifecycleOwner) { book ->
+            // Verifica si el libro es no nulo y agrégalo a la lista
+            book?.let {
+                library.add(it)
+                // Actualiza el adaptador con la nueva lista
+                adapter.notifyDataSetChanged() // Asegúrate de que ListAdapter tenga este metodo
+            }
+        }
+
+        adapter = ListAdapater(library) // Inicializa con una lista vacía
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+
+        //viewModel.items.observe(viewLifecycleOwner) { items ->
+            // Actualizar el adaptador cuando cambien los datos
+            //adapter.updateList(items)
+        //}
+    }
+
 }
