@@ -1,14 +1,22 @@
 package com.example.tarea20
 
+import android.content.Context
+import android.view.ContextMenu
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class ListAdapater(private var books: ArrayList<ListItem>) : RecyclerView.Adapter<ListAdapater.BookViewHolder>() {
+
+    var onContextMenuClickListener: ((MenuItem, Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -39,7 +47,10 @@ class ListAdapater(private var books: ArrayList<ListItem>) : RecyclerView.Adapte
         val authorTextView: TextView = itemView.findViewById(R.id.author_view)
         val startDateTextView: TextView = itemView.findViewById(R.id.startdate_view)
         val endDateTextView: TextView = itemView.findViewById(R.id.enddate_view)
-        val ratingRatingBar : RatingBar = itemView.findViewById(R.id.rating_bar_view)
+        val ratingRatingBar: RatingBar = itemView.findViewById(R.id.rating_bar_view)
+
+        val buttonOption: Button = itemView.findViewById(R.id.menu_button_item)
     }
+
 
 }

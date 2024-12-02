@@ -32,8 +32,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ISBN_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    >
 
                 </com.google.android.material.textfield.TextInputEditText>
 
@@ -52,6 +55,7 @@
                 tools:layout_editor_absoluteX="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titulo_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -67,6 +71,7 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/autor_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
@@ -153,6 +158,7 @@
                 android:hint="@string/opinion"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/opinion_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
@@ -247,16 +253,15 @@
         android:id="@+id/buttonadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:backgroundTint="@color/md_theme_primaryFixedDim_mediumContrast"
         android:layout_gravity="end|bottom"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/md_theme_primaryFixedDim_mediumContrast"
+        android:contentDescription="@string/addbook"
+        android:onClick="insert"
         android:outlineAmbientShadowColor="@color/cardview_dark_background"
         android:src="@drawable/baseline_check_24"
-        android:contentDescription="@string/addbook"
-        app:tint="@color/md_theme_inversePrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"
-        >
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:tint="@color/md_theme_inversePrimary"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 </FrameLayout>

@@ -1,9 +1,12 @@
 package com.example.tarea20
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
@@ -13,10 +16,12 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.contentValuesOf
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -25,35 +30,46 @@ import java.util.Locale
 class FormsActivity : AppCompatActivity() {
 
     //Boton de imagen
-    lateinit var btnImage : Button
-    //Datos para mostrar en el recycleview
-    private lateinit var tituloTextView: TextView
-    private lateinit var autorTextView: TextView
-    private lateinit var startDateTextView: TextView
-    private lateinit var endDateTextView: TextView
-    private lateinit var ratingRatingBar: RatingBar
-    //ViewModel
-    private val viewModel: ViewModel by viewModels()
+    private lateinit var btnImage : Button
+
+    //Datos del registro
+    private lateinit var Titulo:TextInputEditText
+    private lateinit var Autor: TextInputEditText
+    private lateinit var ISBN: TextInputEditText
+    private lateinit var Editorial:TextInputLayout
+    private lateinit var dateStartEditText:EditText
+    private lateinit var dateFinalEditText: EditText
+    private lateinit var Opinion: TextInputEditText
+    private lateinit var ratingBar: RatingBar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_forms) // Asocia el diseño con la actividad
 
-        //Variables para guardar el texto
-
         //Para los botones
         val buttonCancel: Button = findViewById(R.id.cancel_button)
         val buttonSubmit:FloatingActionButton = findViewById(R.id.buttonadd)
 
+        //Para los datos de texto
+        Titulo = findViewById(R.id.titulo_text)
+        Autor = findViewById(R.id.autor_text)
+        ISBN = findViewById(R.id.ISBN_text)
+        Opinion = findViewById(R.id.opinion_text)
+
+        //Rating Bar
+        ratingBar = findViewById(R.id.ratingBaradd)
+
+        //Datos de la editorial
         val items = arrayOf("Planeta", "Porrua", "Gandhi", "Penguin Random House","Urano","Oceano")
-        val textField = findViewById<TextInputLayout>(R.id.InputEditorialtext)
-        (textField.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
+        Editorial = findViewById(R.id.InputEditorialtext)
+        (Editorial.editText as? MaterialAutoCompleteTextView)?.setSimpleItems(items)
 
         // Referencia al EditText de la fecha de inicio
-        val dateStartEditText = findViewById<EditText>(R.id.Datestart)
+        dateStartEditText = findViewById(R.id.Datestart)
 
         //Referencia al EditText de la fecha de final
-        val dateFinalEditText = findViewById<EditText>(R.id.Datefinal)
+        dateFinalEditText = findViewById(R.id.Datefinal)
 
         // Configurar DatePickerDialog
         val calendar = Calendar.getInstance()
@@ -234,25 +250,79 @@ class FormsActivity : AppCompatActivity() {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
-        buttonSubmit.setOnClickListener{
-            val titulo = tituloTextView.text.toString()
-            val autor = autorTextView.text.toString()
-            val startDate = startDateTextView.text.toString()
-            val endDate = endDateTextView.text.toString()
-            val rating = ratingRatingBar.rating.toDouble()
-
-            val elemento = ListItem(titulo,autor,startDate,endDate,rating)
-            viewModel.setData(elemento)
-
-            val intent = Intent(this, HomeFragment::class.java)
-            Toast.makeText(this, "Se cambio de pantalla",Toast.LENGTH_LONG).show()
-            startActivity(intent)
-        }
-
         buttonCancel.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+    }
+
+    private fun limpiarFormulario() {
+        ISBN.setText("")
+        Titulo.setText("")
+        Autor.setText("")
+        Editorial.editText?.setText("")
+        dateStartEditText.setText("")
+        dateFinalEditText.setText("")
+        Opinion.setText("")
+        ratingBar.rating = 0f
+    }
+
+    fun insert(view: View){
+        val con = SQLite(this,"Libreria",null,1)
+        var bd = con.writableDatabase
+
+        if (bd.isOpen) {
+            Log.i("DatabaseCheck", "Base de datos abierta correctamente")
+        } else {
+            Log.e("DatabaseCheck", "Error al abrir la base de datos")
+        }
+
+        var isbn = ISBN.text.toString()
+        var titulo = Titulo.text.toString()
+        var autor = Autor.text.toString()
+        var editorial = Editorial.editText?.text.toString()
+        var fechaInicio = dateStartEditText.text.toString()
+        var fechaFinal = dateFinalEditText.text.toString()
+        var opinion = Opinion.text.toString()
+        var rating = ratingBar.rating
+
+        if(
+            isbn.isNotEmpty() &&
+            titulo.isNotEmpty() &&
+            autor.isNotEmpty() &&
+            editorial.isNotEmpty() &&
+            fechaInicio.isNotEmpty() &&
+            fechaFinal.isNotEmpty() &&
+            rating != 0f // Verifica que el rating no sea 0
+        ){
+            val registro = ContentValues()
+            registro.put("ISBN", isbn)
+            registro.put("Titulo", titulo)
+            registro.put("Autor", autor)
+            registro.put("Editorial", editorial)
+            registro.put("FechaInicio", fechaInicio)
+            registro.put("FechaFinal", fechaFinal)
+            registro.put("Opinion", opinion)
+            registro.put("Rating", rating.toFloat())
+
+            try {
+                bd.insert("Libro", null, registro)
+                Toast.makeText(this, "Registro agregado exitosamente", Toast.LENGTH_LONG).show()
+                limpiarFormulario()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Error al agregar el registro: ${e.message}", Toast.LENGTH_LONG).show()
+            } finally {
+                bd.close()
+            }
+
+            Toast.makeText(this,"Se agrego exisitosmanete el registro",Toast.LENGTH_LONG).show()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+        }else{
+            Toast.makeText(this,"No se realizo el regiistro",Toast.LENGTH_LONG).show()
+        }
     }
 }
