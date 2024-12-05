@@ -3,12 +3,15 @@ package com.example.tarea20
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -31,6 +35,10 @@ class FormsActivity : AppCompatActivity() {
 
     //Boton de imagen
     private lateinit var btnImage : Button
+
+    //Imagen
+    private lateinit var imageView : ImageView
+    private var imageBytes: ByteArray? = null
 
     //Datos del registro
     private lateinit var Titulo:TextInputEditText
@@ -236,14 +244,25 @@ class FormsActivity : AppCompatActivity() {
         chipGroup.addView(chipNovela)
         chipGroup.addView(chipCiencia)
 
-        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){ uri ->
-            if(uri != null){
-                Log.i("aris","seleccionado")
-            }else{
-                Log.i("aris","no seleccionado")
+        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                imageView.setImageURI(uri) // Muestra la imagen en el ImageView
+
+                // Convierte el URI en un Bitmap y luego en un ByteArray
+                val drawable = imageView.drawable
+                if (drawable is BitmapDrawable) {
+                    val bitmap = drawable.bitmap
+                    val outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                    imageBytes = outputStream.toByteArray() // Asigna los bytes a la variable global
+                }
+
+            } else {
+                Log.i("ImageSelection", "No se seleccionó ninguna imagen")
             }
         }
 
+        imageView = findViewById(R.id.image_view)
         btnImage = findViewById(R.id.addimage_button)
 
         btnImage.setOnClickListener{
@@ -266,17 +285,13 @@ class FormsActivity : AppCompatActivity() {
         dateFinalEditText.setText("")
         Opinion.setText("")
         ratingBar.rating = 0f
+        imageView.setImageURI(null)
     }
 
     fun insert(view: View){
+
         val con = SQLite(this,"Libreria",null,1)
         var bd = con.writableDatabase
-
-        if (bd.isOpen) {
-            Log.i("DatabaseCheck", "Base de datos abierta correctamente")
-        } else {
-            Log.e("DatabaseCheck", "Error al abrir la base de datos")
-        }
 
         var isbn = ISBN.text.toString()
         var titulo = Titulo.text.toString()
@@ -286,6 +301,7 @@ class FormsActivity : AppCompatActivity() {
         var fechaFinal = dateFinalEditText.text.toString()
         var opinion = Opinion.text.toString()
         var rating = ratingBar.rating
+        var image = imageViewToByteArray(imageView)
 
         if(
             isbn.isNotEmpty() &&
@@ -294,7 +310,8 @@ class FormsActivity : AppCompatActivity() {
             editorial.isNotEmpty() &&
             fechaInicio.isNotEmpty() &&
             fechaFinal.isNotEmpty() &&
-            rating != 0f // Verifica que el rating no sea 0
+            rating != 0f &&
+            image != null
         ){
             val registro = ContentValues()
             registro.put("ISBN", isbn)
@@ -305,10 +322,9 @@ class FormsActivity : AppCompatActivity() {
             registro.put("FechaFinal", fechaFinal)
             registro.put("Opinion", opinion)
             registro.put("Rating", rating.toFloat())
-
+            registro.put("Image",image)
             try {
                 bd.insert("Libro", null, registro)
-                Toast.makeText(this, "Registro agregado exitosamente", Toast.LENGTH_LONG).show()
                 limpiarFormulario()
             } catch (e: Exception) {
                 Toast.makeText(this, "Error al agregar el registro: ${e.message}", Toast.LENGTH_LONG).show()
@@ -316,13 +332,20 @@ class FormsActivity : AppCompatActivity() {
                 bd.close()
             }
 
-            Toast.makeText(this,"Se agrego exisitosmanete el registro",Toast.LENGTH_LONG).show()
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
         }else{
-            Toast.makeText(this,"No se realizo el regiistro",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"No se realizo el registro",Toast.LENGTH_LONG).show()
         }
     }
+
+    private fun imageViewToByteArray(imageView: ImageView): ByteArray? {
+        val drawable = imageView.drawable ?: return null
+        val bitmap = (drawable as BitmapDrawable).bitmap
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+        return outputStream.toByteArray()
+    }
+
 }

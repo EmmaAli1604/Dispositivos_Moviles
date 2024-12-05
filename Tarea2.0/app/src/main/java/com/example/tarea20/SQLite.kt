@@ -5,8 +5,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import androidx.annotation.Nullable
-import androidx.lifecycle.ViewModelProvider
 
 class SQLite
     (context: Context,
@@ -25,6 +23,7 @@ class SQLite
         const val COLUMN_END_DATE = "FechaFinal"
         const val COLUMN_OPINION = "Opinion"
         const val COLUMN_RATING = "Rating"
+        const val COLUMN_IMAGE = "Image"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -37,7 +36,8 @@ class SQLite
                     "$COLUMN_START_DATE DATETIME NOT NULL, " +
                     "$COLUMN_END_DATE DATETIME NOT NULL, " +
                     "$COLUMN_OPINION VARCHAR(100), " +
-                    "$COLUMN_RATING FLOAT NOT NULL)"
+                    "$COLUMN_RATING FLOAT NOT NULL,"+
+                    "$COLUMN_IMAGE BLOB NOT NULL)"
         )
     }
 
@@ -47,12 +47,17 @@ class SQLite
         onCreate(db)
     }
 
+    override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME") // O elimina otras tablas si es necesario.
+        onCreate(db)
+    }
+
     fun readDataList(): Cursor? {
         val db = this.readableDatabase // Obtén una instancia de la base de datos en modo lectura
         return if (db != null) {
             val query = """
             SELECT $COLUMN_TITLE, $COLUMN_AUTHOR, $COLUMN_START_DATE, 
-                   $COLUMN_END_DATE, $COLUMN_RATING 
+                   $COLUMN_END_DATE, $COLUMN_RATING, $COLUMN_IMAGE
             FROM $TABLE_NAME
         """
             db.rawQuery(query, null) // Ejecuta la consulta y devuelve el cursor

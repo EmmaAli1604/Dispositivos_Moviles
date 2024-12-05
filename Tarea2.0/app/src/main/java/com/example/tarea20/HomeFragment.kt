@@ -1,14 +1,12 @@
 package com.example.tarea20
 
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,18 +49,18 @@ class HomeFragment : Fragment() {
         if (cursor != null && cursor.moveToFirst()) { // Verifica que el cursor no esté vacío
             do {
                 // Obtén los datos de cada columna
-                val title = cursor.getString(0) // Primera columna: Titulo
-                val author = cursor.getString(1) // Segunda columna: Autor
-                val startDate = cursor.getString(2) // Tercera columna: FechaInicio
-                val endDate = cursor.getString(3) // Cuarta columna: FechaFinal
-                val rating = cursor.getFloat(4) // Quinta columna: Rating
+                val title = cursor.getString(0)
+                val author = cursor.getString(1)
+                val startDate = cursor.getString(2)
+                val endDate = cursor.getString(3)
+                val rating = cursor.getFloat(4)
+                val image = cursor.getBlob(5)
 
                 // Crea un objeto ListItem y agrégalo a la lista
-                library.add(ListItem(title, author, startDate, endDate, rating.toDouble()))
-            } while (cursor.moveToNext())
+                library.add(ListItem(title, author, startDate, endDate, rating.toDouble(),image))
+            }while (cursor.moveToNext())
+
+            cursor.close() // Cierra el cursor después de usarlo
         }
-
-        cursor?.close() // Cierra el cursor después de usarlo
     }
-
 }
