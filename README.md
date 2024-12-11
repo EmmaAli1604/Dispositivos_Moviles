@@ -1,6 +1,6 @@
 <h1 align="center"> BookNest </h1> <br>
 <p align="center">
-  <a href="https://gitpoint.co/">
+  <a href="">
     <img alt="BookNest" title="BookNest" src="http://i.imgur.com/VShxJHs.png" width="450">
   </a>
 </p>
